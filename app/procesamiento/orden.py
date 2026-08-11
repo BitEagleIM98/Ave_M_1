@@ -39,7 +39,7 @@ async def construir_orden():
                     sleep(1)
                     cont_err_cam += 1
                 if confirmacion == True:
-                    break
+                    continue
                 else:
                     raise Exception('No fue posible conectar con la cámara') 
       
