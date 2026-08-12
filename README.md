@@ -13,7 +13,7 @@ sudo apt update
 sudo apt upgrade
 ```
 
-## Paso 2: Verificar que python 3.12 o superior este einstalado en conjunto con git
+## Paso 2: Verificar que python 3.12 o superior este instalado en conjunto con git
 
 ```bash
 sudo apt install python3 git -y
@@ -40,7 +40,7 @@ sudo apt install ./python3-sounddevice_0.5.3-1_all.deb
 sudo rm -rf python3-sounddevice_0.5.3-1_all.deb
 ```
 
-## Paso 5: Inicializar carpetas de aplicación y glonar repositorio
+## Paso 5: Inicializar carpetas de aplicación y clonar repositorio
 
 ```bash
 mkdir Inv_sys/git/ && cd Inv_sys/git/
@@ -68,5 +68,5 @@ chmod x+ requirements.sh
 ## Comando para correr aplicación de manera manual:
 
 ```bash
--sudo python3 app/boot.py
+sudo python3 app/boot.py
 ```
