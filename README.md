@@ -1,50 +1,52 @@
-# Ave_M_1
+## Ave_M_1
 
 Aplicación de sistema de inventarios y logística.
 
-# Pasos para configuración de sistema
+## Pasos para configuración de sistema
 
-# Paso 1: Actualizar sistema
+## Paso 1: Actualizar sistema
 
--sudo apt update
+```bash
+sudo apt update
 
--sudo apt upgrade
+```bash
+sudo apt upgrade
 
-# Paso 2: Verificar que python 3.12 o superior este einstalado en conjunto con git
+## Paso 2: Verificar que python 3.12 o superior este einstalado en conjunto con git
 
--sudo apt install python3 git -y
+```bash
+sudo apt install python3 git -y
 
-# Paso 3: Activar servicios bluetooth
+## Paso 3: Activar servicios bluetooth
 
--sudo systemctl enable bluetooth
+```bash
+sudo systemctl enable bluetooth
+sudo systemctl start bluetooth
 
--sudo systemctl start bluetooth
+## Paso 4: Instalar dependencias adicionales
 
-# Paso 4: Instalar dependencias adicionales
+```bash
+wget http://archive.ubuntu.com/ubuntu/pool/universe/p/python-sounddevice/python3-sounddevice_0.5.3-1_all.deb
+sudo apt install ./python3-sounddevice_0.5.3-1_all.deb
+sudo rm -rf python3-sounddevice_0.5.3-1_all.deb
 
--wget http://archive.ubuntu.com/ubuntu/pool/universe/p/python-sounddevice/python3-sounddevice_0.5.3-1_all.deb
+## Paso 5: Inicializar carpetas de aplicación y glonar repositorio
 
--sudo apt install ./python3-sounddevice_0.5.3-1_all.deb
+```bash
+mkdir Inv_sys/git/ && cd Inv_sys/git/
+git clone git@github.com:BitEagleIM98/Ave_M_1.git
+cd Ave_M_1
 
--sudo rm -rf python3-sounddevice_0.5.3-1_all.deb
+## Paso 6: Dar permisos a archivo .sh e instalar requerimientos
 
-# Paso 5: Inicializar carpetas de aplicación y glonar repositorio
+```bash
+chmod x+ requirements.sh
+./requirements.sh
 
--mkdir Inv_sys/git/ && cd Inv_sys/git/
+## Paso 7: Generar archivo de entorno en carpeta raíz de aplicación
 
--git clone git@github.com:BitEagleIM98/Ave_M_1.git
+## Comando para correr aplicación de manera manual:
 
--cd Ave_M_1
-
-# Paso 6: Dar permisos a archivo .sh e instalar requerimientos
-
--chmod x+ requirements.sh
-
--./requirements.sh
-
-# Paso 7: Generar archivo de entorno en carpeta raíz de aplicación con variables de entorno
-
-# Comando para correr aplicación de manera manual:
-
+```bash
 -sudo python3 app/boot.py
 

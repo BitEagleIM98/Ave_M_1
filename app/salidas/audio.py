@@ -13,4 +13,4 @@ async def contestar_auriculares(audio):
         sd.play(audio, fs, device=spk_index)
         await asyncio.sleep(duration)
     except Exception as e:
-        print('Sistema detenido: ', e)
+        print('Error de comunicación con auriculares: ', e)

@@ -17,4 +17,4 @@ async def escuchar_microfono():
         await asyncio.sleep(duration)
         return audio
     except Exception as e:
-        print('Sistema detenido: ', e)
+        print('Error de comunicación con auriculares: ', e)
