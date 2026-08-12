@@ -29,7 +29,7 @@ async def construir_orden():
                 etiqueta = input('Carrito no reconocido vuelva a intentar (entrada/salida/merma): ')  # TODO: cambiar por reconocimiento de voz
 
         while True:
-            
+
             if DEBUG_MODE == 'OFF':
                 peso_bascula = float(await recibir_peso())
                 confirmacion, cuadro_camara = await recibir_cuadro()  # TODO: incorporar resultado de reconocimiento
@@ -43,7 +43,7 @@ async def construir_orden():
                 if peso_bascula != 0.0 and confirmacion == True:
                     print('Se registra peso de articulo...')
                     sleep(2)
-                    comando_audio = await escuchar_microfono()
+                    comando_audio_crudo = await escuchar_microfono()
                     print('Se escucha microfono para nombrar el producto')
 
                 elif peso_bascula != 0.0 and confirmacion == False:
@@ -68,7 +68,7 @@ async def construir_orden():
                 if peso_bascula > 0.0:
                     print('Se registra peso de articulo...')
                     sleep(2)
-                    comando_audio = await escuchar_microfono()
+                    comando_audio_crudo = await escuchar_microfono()
                     print('Se escucha microfono para nombrar el producto')
 
                 else:

@@ -19,14 +19,7 @@ sudo apt upgrade
 sudo apt install python3 git -y
 ```
 
-## Paso 3: Activar servicios bluetooth
-
-```bash
-sudo systemctl enable bluetooth
-sudo systemctl start bluetooth
-```
-
-## Paso 4: Instalar dependencias adicionales
+## Paso 3: Instalar dependencias adicionales
 
 ```bash
 wget http://archive.ubuntu.com/ubuntu/pool/universe/p/python-sounddevice/python3-sounddevice_0.5.3-1_all.deb
@@ -40,7 +33,7 @@ sudo apt install ./python3-sounddevice_0.5.3-1_all.deb
 sudo rm -rf python3-sounddevice_0.5.3-1_all.deb
 ```
 
-## Paso 5: Inicializar carpetas de aplicación y clonar repositorio
+## Paso 4: Inicializar carpetas de aplicación y clonar repositorio
 
 ```bash
 mkdir -p Inv_sys/git/ && cd Inv_sys/git/
@@ -54,14 +47,52 @@ git clone git@github.com:BitEagleIM98/Ave_M_1.git
 cd Ave_M_1
 ```
 
-## Paso 6: Dar permisos a archivo .sh e instalar requerimientos
+## Paso 5: Dar permisos a archivo .sh e instalar requerimientos
 
 ```bash
-chmod x+ requirements.sh
+chmod +x requirements.sh
 ```
 
 ```bash
 ./requirements.sh
+```
+
+## Paso 6: Activar servicios bluetooth y configurar servicios
+
+```bash
+sudo systemctl enable bluetooth
+sudo systemctl start bluetooth
+```
+
+Posteriormente, configurar bluetooth para establecer una conexión.
+```bash
+bluetoothctl
+```
+dentro del control ingresar los siguientes comandos:
+
+```bash
+power on
+```
+```bash
+agent on
+```
+```bash
+default-agent
+```
+```bash
+scan on
+```
+```bash
+pair XX:XX:XX:XX:XX:XX
+```
+```bash
+trust XX:XX:XX:XX:XX:XX
+```
+```bash
+connect XX:XX:XX:XX:XX:XX
+```
+```bash
+exit
 ```
 ## Paso 7: Generar archivo de entorno en carpeta raíz de aplicación
 
