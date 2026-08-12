@@ -43,7 +43,7 @@ sudo rm -rf python3-sounddevice_0.5.3-1_all.deb
 ## Paso 5: Inicializar carpetas de aplicación y clonar repositorio
 
 ```bash
-mkdir Inv_sys/git/ && cd Inv_sys/git/
+mkdir -p Inv_sys/git/ && cd Inv_sys/git/
 ```
 
 ```bash
