@@ -1,10 +1,13 @@
 from app.entradas.peso import recibir_peso
 from app.entradas.cam import recibir_cuadro
 from app.entradas.micro import escuchar_microfono
-from app.boot import DEBUG_MODE, CAMARA
-import sys
+import os, sys
 from time import sleep
+from dotenv import load_dotenv
 # TODO: definir base de datos y si se usará ORM (SQLite3 o SQLAlchemy) 
+load_dotenv()
+DEBUG_MODE = os.getenv('DEBUG_MODE')
+CAMARA = os.getenv('CAMARA')
 
 
 async def construir_orden():
