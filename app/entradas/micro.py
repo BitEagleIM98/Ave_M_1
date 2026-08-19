@@ -6,7 +6,7 @@ async def escuchar_microfono():
     try:
         fs = 44100
         duration = 5
-        print(sd.query_devices())
+        # print(sd.query_devices())  # Debug Only
         # Cambiar este índice según la salida de sd.query_devices()
         mic_index = 10   # índice del micrófono Bluetooth
         print("Grabando desde el micrófono Bluetooth...")

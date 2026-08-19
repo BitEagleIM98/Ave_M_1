@@ -6,7 +6,7 @@ async def contestar_auriculares(audio):
     try:
         fs = 44100
         duration = 5
-        print(sd.query_devices())
+        # print(sd.query_devices())  # Debug Only
         # Cambiar este índice según la salida de sd.query_devices()
         spk_index = 12   # índice de las bocinas Bluetooth
         print("Reproduciendo en las bocinas Bluetooth...")

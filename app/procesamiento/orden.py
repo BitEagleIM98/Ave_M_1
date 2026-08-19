@@ -18,21 +18,28 @@ async def construir_orden():
     cont_err_cam = 0
     cont_err_pes = 0
     try:
-        etiqueta = input('Selecciones tipo de carrito (entrada/salida/merma): ').lower()  # TODO: cambiar por reconocimiento de voz
+        
+        print('Seleccione tipo de carrito (alta/salida/merma): ')
+        # etiqueta = input('Selecciones tipo de carrito (entrada/salida/merma): ').lower()  # Debug Only
         comando_audio_crudo = await escuchar_microfono()
-        print('Se escucha microfono para nombrar el producto')
-        json_audio, audio_filtrado = await reconocimiento_audio(comando_audio_crudo)
-        print('Se reconoció este mensaje de audio: ', json_audio)
-        await contestar_auriculares(audio_filtrado)
+        etiqueta, audio_filtrado = await reconocimiento_audio(comando_audio_crudo)
+        print('Se reconoció este mensaje de audio: ', etiqueta)
+
         while True:
-            if etiqueta == "entrada":
+
+            if etiqueta == "alta":
                 break
             elif etiqueta == "salida":
                 break
             elif etiqueta == "merma":
                 break
             else:
-                etiqueta = input('Carrito no reconocido vuelva a intentar (entrada/salida/merma): ')  # TODO: cambiar por reconocimiento de voz
+                print('Carrito no reconocido vuelva a intentar (entrada/salida/merma): ')
+                comando_audio_crudo = await escuchar_microfono()
+                etiqueta, audio_filtrado = await reconocimiento_audio(comando_audio_crudo)
+                print('Se reconoció este mensaje de audio: ', etiqueta)
+                # etiqueta = input('Carrito no reconocido vuelva a intentar (entrada/salida/merma): ')  # Debug Only
+        etiqueta = ''
 
         while True:
 
@@ -86,25 +93,41 @@ async def construir_orden():
             else:
                 raise Exception('Configuración de cámara debe de estar en modo ON/OFF')
 
-            car_fin = input('Desea terminar el carrito? [Y/n]: ').lower()  # TODO: cambiar por reconocimiento de voz (esperar unos segundos, si no hay respuesta se toma como "n")
+            # car_fin = input('Desea terminar el carrito? [Y/n]: ').lower()   # DEBUG ONLY
 
-            if car_fin == 'y':
-                conf = input('Confirmación de carrito? [Y/n]: ').lower()  # TODO: cambiar por reconocimiento de voz
+            # if car_fin == 'y':
+            #     conf = input('Confirmación de carrito? [Y/n]: ').lower()
+
+            #     if conf == 'y':
+            #         print('Los datos se publican con etiqueta de: ', etiqueta)
+            #         break
+
+            #     elif conf == 'n':
+            #         print('Los datos no se publican y se descarta carrito')
+            #         break
+
+            # elif car_fin == 'n':
+            #     continue
+
+            print('Desea terminar el carrito? [Sí/No]: ')
+            comando_audio_crudo = await escuchar_microfono()
+            car_fin, audio_filtrado = await reconocimiento_audio(comando_audio_crudo)
+            print('Se reconoció este mensaje de audio: ', car_fin)
+            if car_fin == 'sí':
+                print('Desea confirmar el carrito? [Sí/No]: ')
                 comando_audio_crudo = await escuchar_microfono()
-                print('Se escucha microfono para nombrar el producto')
-                json_audio, audio_filtrado = await reconocimiento_audio(comando_audio_crudo)
-                print('Se reconoció este mensaje de audio: ', json_audio)
-                await contestar_auriculares(audio_filtrado)
+                conf, audio_filtrado = await reconocimiento_audio(comando_audio_crudo)
+                print('Se reconoció este mensaje de audio: ', conf)
 
-                if conf == 'y':
+                if conf == 'sí':
                     print('Los datos se publican con etiqueta de: ', etiqueta)
                     break
 
-                elif conf == 'n':
+                elif conf == 'no':
                     print('Los datos no se publican y se descarta carrito')
                     break
 
-            elif car_fin == 'n':
+            elif car_fin == 'no' or car_fin != 'sí':
                 continue
 
     except Exception as ex:
