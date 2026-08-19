@@ -1,6 +1,8 @@
 from app.entradas.peso import recibir_peso
 from app.entradas.cam import recibir_cuadro
 from app.entradas.micro import escuchar_microfono
+from app.salidas.audio import contestar_auriculares
+from app.procesamiento.reconocimiento_audio import reconocimiento_audio
 import os, sys
 from time import sleep
 from dotenv import load_dotenv
@@ -17,7 +19,11 @@ async def construir_orden():
     cont_err_pes = 0
     try:
         etiqueta = input('Selecciones tipo de carrito (entrada/salida/merma): ').lower()  # TODO: cambiar por reconocimiento de voz
-
+        comando_audio_crudo = await escuchar_microfono()
+        print('Se escucha microfono para nombrar el producto')
+        json_audio, audio_filtrado = await reconocimiento_audio(comando_audio_crudo)
+        print('Se reconoció este mensaje de audio: ', json_audio)
+        await contestar_auriculares(audio_filtrado)
         while True:
             if etiqueta == "entrada":
                 break
@@ -70,6 +76,9 @@ async def construir_orden():
                     sleep(2)
                     comando_audio_crudo = await escuchar_microfono()
                     print('Se escucha microfono para nombrar el producto')
+                    json_audio, audio_filtrado = await reconocimiento_audio(comando_audio_crudo)
+                    print('Se reconoció este mensaje de audio: ', json_audio)
+                    await contestar_auriculares(audio_filtrado)
 
                 else:
                     print('No se reconoce el peso, verifique báscula')
@@ -81,6 +90,11 @@ async def construir_orden():
 
             if car_fin == 'y':
                 conf = input('Confirmación de carrito? [Y/n]: ').lower()  # TODO: cambiar por reconocimiento de voz
+                comando_audio_crudo = await escuchar_microfono()
+                print('Se escucha microfono para nombrar el producto')
+                json_audio, audio_filtrado = await reconocimiento_audio(comando_audio_crudo)
+                print('Se reconoció este mensaje de audio: ', json_audio)
+                await contestar_auriculares(audio_filtrado)
 
                 if conf == 'y':
                     print('Los datos se publican con etiqueta de: ', etiqueta)

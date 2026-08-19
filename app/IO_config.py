@@ -4,7 +4,8 @@ import cv2
 
 class Bascula:
     def __init__(self):
-        self.com_bascula = serial.Serial('/dev/tty0', baudrate=115200, timeout=1)
+        # self.com_bascula = serial.Serial('/dev/tty0', baudrate=115200, timeout=1)  # Para entorno Linux
+        self.com_bascula = serial.Serial('COM5', baudrate=115200, timeout=1)  # Para entorno Windows
 
     def leer_bascula(self):
         self.dato_bascula = self.com_bascula.readline().decode('utf-8').strip()
